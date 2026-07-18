@@ -1,0 +1,13 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Secrets — never commit API keys
+.env
+
+# Local vector database
+chroma_db/
+
+# macOS
+.DS_Store
