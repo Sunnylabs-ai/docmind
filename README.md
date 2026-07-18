@@ -27,7 +27,8 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env        # then put your Gemini API key inside
 python ingest.py            # index the documents in docs/
-python query.py "How many vacation days do I get?"
+python query.py "How many vacation days do I get?"   # CLI
+streamlit run app.py                                  # chat UI
 ```
 
 Drop your own `.md` files into `docs/` and re-run `ingest.py` to chat with anything.
@@ -36,6 +37,7 @@ Drop your own `.md` files into `docs/` and re-run `ingest.py` to chat with anyth
 
 | File | Role |
 |---|---|
+| `app.py` | Streamlit chat UI — history, spinner, per-answer source chunks |
 | `ingest.py` | Load → chunk → embed → store in ChromaDB (run when docs change) |
 | `query.py` | Embed question → retrieve top chunks → generate cited answer |
 | `chunker.py` | Overlapping, heading-aware chunking strategy |
@@ -53,6 +55,6 @@ Drop your own `.md` files into `docs/` and re-run `ingest.py` to chat with anyth
 - [x] Phase 0 — Project setup
 - [x] Phase 1 — Minimal RAG pipeline in a single script (`rag.py`)
 - [x] Phase 2 — Real chunking + persistent vector store (ChromaDB)
-- [ ] Phase 3 — Streamlit chat UI with source citations
+- [x] Phase 3 — Streamlit chat UI with source citations
 - [ ] Phase 4 — Full documentation + architecture diagram
 - [ ] Phase 5 — Live deployment

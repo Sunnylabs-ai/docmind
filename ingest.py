@@ -15,9 +15,12 @@ import chromadb
 from chunker import chunk_text
 from llm import embed_texts
 
-DB_PATH = "chroma_db"
+# Anchor paths to this file's folder so ingest/query/UI work no matter
+# which directory they're launched from.
+BASE_DIR = Path(__file__).parent
+DB_PATH = str(BASE_DIR / "chroma_db")
 COLLECTION_NAME = "docmind"
-DOCS_FOLDER = "docs"
+DOCS_FOLDER = str(BASE_DIR / "docs")
 
 
 def main() -> None:
