@@ -44,11 +44,22 @@ Drop your own `.md` files into `docs/` and re-run `ingest.py` to chat with anyth
 | `llm.py` | All Gemini calls in one swappable module |
 | `rag.py` | The Phase 1 single-file pipeline — kept as the project's origin story |
 
+## Evaluation
+
+RAG systems fail silently — retrieval can rank the wrong chunk first while answers still *look* plausible. So DocMind ships with a test harness (`python eval.py`): questions with known correct sources and facts, including one deliberately unanswerable question that must be refused.
+
+| Metric | Score |
+|---|---|
+| Retrieval top-1 — right file ranked first | **7/7** |
+| Retrieval top-3 — right file in retrieved set | **7/7** |
+| Answer accuracy — incl. refusing the unanswerable | **8/8** |
+
 ## Lessons learned (so far)
 
 - **Chunking quality beats database choice.** In Phase 1, "who founded the company?" retrieved a *menu item* as the top match, because lone paragraphs lack context. Grouping paragraphs under their headings fixed the ranking — before touching any database.
 - **Top-k retrieval is a safety net.** Even when the #1 chunk was wrong, the right one was in the top 3, so the answer survived.
 - **Grounding works.** Asking for the (nonexistent) wifi password returns "I don't know" instead of a hallucination — enforced by one line in the prompt.
+- **Rate limits come in layers.** The eval suite first hit Gemini's 5-requests/*minute* cap, then the 20-requests/*day* cap for `gemini-3.5-flash`. Fixes: exponential-backoff retry in `llm.py`, paced eval runs, and switching to `flash-lite` — quotas are per-model, so model choice is also a quota decision.
 
 ## Roadmap
 
@@ -56,5 +67,6 @@ Drop your own `.md` files into `docs/` and re-run `ingest.py` to chat with anyth
 - [x] Phase 1 — Minimal RAG pipeline in a single script (`rag.py`)
 - [x] Phase 2 — Real chunking + persistent vector store (ChromaDB)
 - [x] Phase 3 — Streamlit chat UI with source citations
-- [ ] Phase 4 — Full documentation + architecture diagram
-- [ ] Phase 5 — Live deployment
+- [x] Phase 4 — Evaluation harness (`eval.py`): retrieval hit-rate + answer accuracy
+- [ ] Phase 5 — Real corpus + architecture diagram + full documentation
+- [ ] Phase 6 — Live deployment (Streamlit Community Cloud)
