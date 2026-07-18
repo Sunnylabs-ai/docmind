@@ -55,5 +55,19 @@ def main() -> None:
     print(f"Index written to {DB_PATH}/ — ready for query.py")
 
 
+def ensure_index() -> None:
+    """Build the index only if it doesn't exist yet.
+
+    Deployment servers (and fresh clones) start with no chroma_db/ —
+    the vector index is generated data, so it lives outside git and
+    gets rebuilt from docs/ wherever the app boots.
+    """
+    db = chromadb.PersistentClient(path=DB_PATH)
+    try:
+        db.get_collection(COLLECTION_NAME)
+    except Exception:
+        main()
+
+
 if __name__ == "__main__":
     main()

@@ -11,9 +11,20 @@ from pathlib import Path
 
 import streamlit as st
 
+from ingest import ensure_index
 from query import answer, retrieve
 
 st.set_page_config(page_title="DocMind", page_icon="🧠")
+
+
+@st.cache_resource(show_spinner="First boot: building the vector index…")
+def boot() -> bool:
+    """Runs once per server process — builds the index if it's missing."""
+    ensure_index()
+    return True
+
+
+boot()
 
 
 # ── Sidebar: what am I looking at? ───────────────────────────────────────────
