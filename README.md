@@ -22,7 +22,7 @@ question  → embed → find nearest chunks → LLM answers from those chunks
 ## Roadmap
 
 - [x] Phase 0 — Project setup
-- [ ] Phase 1 — Minimal RAG pipeline in a single script
+- [x] Phase 1 — Minimal RAG pipeline in a single script (`rag.py`)
 - [ ] Phase 2 — Real chunking + persistent vector store (ChromaDB)
 - [ ] Phase 3 — Streamlit chat UI with source citations
 - [ ] Phase 4 — Full documentation + architecture diagram
