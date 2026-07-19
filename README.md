@@ -6,12 +6,22 @@ Chat with your documents. A Retrieval-Augmented Generation (RAG) system built fr
 
 > 🚧 **Work in progress** — building in public. Follow the commit history to see it grow phase by phase.
 
-## How it works
+## Architecture
 
-```
-documents → chunk → embed → vector store
-                                  ↓
-question  → embed → find nearest chunks → LLM answers from those chunks
+```mermaid
+flowchart LR
+    subgraph ingestion["📥 Ingestion — python ingest.py (when docs change)"]
+        A["docs/*.md"] --> B["chunker.py<br>heading-aware chunks<br>+ overlap"]
+        B --> C["Gemini<br>embeddings"]
+        C --> D[("ChromaDB<br>vector index")]
+    end
+    subgraph query["💬 Query — every question"]
+        Q["customer<br>question"] --> E["Gemini<br>embedding"]
+        E --> F["vector search<br>top-3 chunks"]
+        D -.-> F
+        F --> G["Gemini chat model<br>answer grounded in chunks"]
+        G --> H["Streamlit UI<br>answer + cited sources<br>or human handoff"]
+    end
 ```
 
 ## Tech stack
