@@ -4,7 +4,9 @@ Chat with your documents. A Retrieval-Augmented Generation (RAG) system built fr
 
 **Demo scenario — AI customer support.** The index holds the support knowledge base of *Nimbus*, a fictional smart-thermostat company. The assistant answers customer questions **only** from the company's docs, cites its sources, and hands off to a human agent when the docs don't cover it — the highest-ROI commercial application of RAG (every deflected support ticket saves money). The engine itself is generic: point `docs/` at any folder of files and re-run `ingest.py`.
 
-> 🚧 **Work in progress** — building in public. Follow the commit history to see it grow phase by phase.
+> **🔴 Live demo: [sunnylabs-docmind.streamlit.app](https://sunnylabs-docmind.streamlit.app/)** — no setup needed, just ask it a support question.
+>
+> Built in public, phase by phase — the commit history is the build log.
 
 ## Architecture
 
@@ -84,4 +86,11 @@ The one top-1 miss is analyzed in *Lessons learned* below — kept visible, not 
 - [x] Phase 3 — Streamlit chat UI with source citations
 - [x] Phase 4 — Evaluation harness (`eval.py`): retrieval hit-rate + answer accuracy
 - [x] Phase 5 — Commercial demo scenario: support knowledge base + human-agent handoff
-- [ ] Phase 6 — Architecture diagram, demo GIF, live deployment (Streamlit Community Cloud)
+- [x] Phase 6 — Architecture diagram + live deployment on Streamlit Community Cloud
+
+## Ideas for what's next
+
+- Conversation memory (follow-up questions that reference earlier turns)
+- A reranker or query expansion to close the vocabulary-mismatch gap found in eval
+- Mirror deployment on Hugging Face Spaces
+- Swap `llm.py` to a second provider behind a config flag
