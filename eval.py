@@ -19,24 +19,24 @@ import time
 
 from query import answer, retrieve
 
-# Each case: the question, which file the answer lives in
+# Each case: a realistic customer question, which file the answer lives in
 # (None = deliberately unanswerable), and a fact the reply must contain.
 EVAL_SET = [
-    {"question": "How many vacation days do full-time employees get?",
-     "source": "handbook.md", "expect": "23"},
-    {"question": "Which days can office staff work remotely?",
-     "source": "handbook.md", "expect": "tuesday"},
-    {"question": "Which dog is allowed inside, and everywhere including the roastery?",
-     "source": "handbook.md", "expect": "biscuit"},
-    {"question": "What is the best-selling drink and what does it cost?",
-     "source": "menu.md", "expect": "6.25"},
-    {"question": "During which months can I order a Solar Flare?",
-     "source": "menu.md", "expect": "april"},
-    {"question": "Who founded Aurora Coffee?",
-     "source": "history.md", "expect": "mara ellison"},
-    {"question": "How much did the founder pay for the first shop at auction?",
-     "source": "history.md", "expect": "dollar"},
-    {"question": "What is the wifi password?",
+    {"question": "How many days do I have to return my thermostat?",
+     "source": "warranty-returns.md", "expect": "45"},
+    {"question": "How much does Nimbus Plus cost per month?",
+     "source": "billing-and-plans.md", "expect": "4.99"},
+    {"question": "My thermostat has a flashing amber light — what does that mean?",
+     "source": "troubleshooting.md", "expect": "power"},
+    {"question": "What kind of Wi-Fi network does the thermostat need?",
+     "source": "setup-guide.md", "expect": "2.4"},
+    {"question": "How do I cancel my subscription?",
+     "source": "billing-and-plans.md", "expect": "settings"},
+    {"question": "How do I restart the thermostat when it shows offline?",
+     "source": "troubleshooting.md", "expect": "10 seconds"},
+    {"question": "How long is the warranty on the T2?",
+     "source": "warranty-returns.md", "expect": "3-year"},
+    {"question": "Can Nimbus control my garage door?",
      "source": None, "expect": "don't know"},
 ]
 

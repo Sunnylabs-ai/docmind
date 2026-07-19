@@ -31,10 +31,13 @@ boot()
 with st.sidebar:
     st.title("🧠 DocMind")
     st.markdown(
-        "Chat with your documents. Answers come **only** from the files "
-        "below — with sources shown for every reply."
+        "A RAG-powered **customer support assistant**. This demo indexes the "
+        "support knowledge base of *Nimbus*, a fictional smart-thermostat "
+        "company. Answers come **only** from the documents below — with "
+        "sources shown for every reply, and a human-agent handoff when the "
+        "docs don't have the answer."
     )
-    st.subheader("Indexed documents")
+    st.subheader("Indexed knowledge base")
     for path in sorted((Path(__file__).parent / "docs").glob("*.md")):
         st.caption(f"📄 {path.name}")
     st.divider()

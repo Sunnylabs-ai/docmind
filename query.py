@@ -42,8 +42,8 @@ def retrieve(question: str) -> list[dict]:
 
 def answer(question: str, retrieved: list[dict]) -> str:
     context = "\n\n".join(f"[{c['source']}]\n{c['text']}" for c in retrieved)
-    prompt = f"""Answer the question using ONLY the context below.
-If the context doesn't contain the answer, say "I don't know based on my documents."
+    prompt = f"""You are a customer support assistant. Answer the question using ONLY the context below.
+If the context doesn't contain the answer, say "I don't know based on the documentation" and offer to connect the customer with a human agent — never guess.
 Cite the source file name in your answer.
 
 Context:
