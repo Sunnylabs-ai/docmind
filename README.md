@@ -8,6 +8,8 @@ Chat with your documents. A Retrieval-Augmented Generation (RAG) system built fr
 >
 > Built in public, phase by phase — the commit history is the build log.
 
+![DocMind answering a support question with cited sources](assets/demo-screenshot.png)
+
 ## Architecture
 
 ```mermaid
